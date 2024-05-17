@@ -1,1 +1,1 @@
-from . import employee
+from . import employee, mail_wizard

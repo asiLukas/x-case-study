@@ -1,0 +1,8 @@
+<odoo>
+  <record id="action_hr_employee_email_wizard" model="ir.actions.act_window">
+    <field name="name">Send Emails from Excel</field>
+    <field name="res_model">hr.employee.email.wizard</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+  </record>
+</odoo>

@@ -8,16 +8,19 @@
       <xpath expr="//field[@name='work_email']" position="after">
         <field name="i_love_gb" string="I Love GymBeam" />
       </xpath>
+
       <xpath expr="//div[@class='o_address_format']" position="after">
         <field name="salary" string="Salary" placeholder="Enter salary" />
         <field name="tax" string="Tax" placeholder="Enter tax" />
         <field name="total_salary" string="Total Salary" readonly="1" />
       </xpath>
-      <!-- <xpath expr="//field[@name='private_phone']" position="replace"> -->
-      <!--   <field name="special_phone" string="Special Phone" placeholder="Enter special phone" /> -->
-      <!-- </xpath> -->
 
-      <!-- TODO translations? -->
+      <xpath expr="//button[@name='152']" position="after">
+        <button name="send_welcome_mails" type="object" string="Send Mails" />
+        <button name="action_open_wizard" string="Send Mails(Wizard)" type="object"
+          class="oe_highlight" />
+      </xpath>
+
       <xpath expr="//field[@name='work_phone']" position="replace">
         <field name="special_phone" string="Work phone" placeholder="Enter Phone" />
       </xpath>
@@ -28,4 +31,5 @@
       </xpath>
     </field>
   </record>
+  <menuitem id="menu_custom" name="Custom Menu" sequence="10" />
 </odoo>
