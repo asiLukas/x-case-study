@@ -21,6 +21,11 @@
       <xpath expr="//field[@name='work_phone']" position="replace">
         <field name="special_phone" string="Work phone" placeholder="Enter Phone" />
       </xpath>
+
+      <xpath expr="//field[@name='i_love_gb']" position="after">
+        <field name="employee_contacts" string="Employee Contacts"
+          invisible="i_love_gb == False" />
+      </xpath>
     </field>
   </record>
 </odoo>

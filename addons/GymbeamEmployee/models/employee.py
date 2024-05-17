@@ -11,6 +11,7 @@ class Employee(models.Model):
         string="Total Salary", compute="_compute_total_salary", store=True
     )
     special_phone = fields.Char(string="Special Phone")
+    employee_contacts = fields.Binary(string="Employee Contacts")
 
     @api.depends("salary", "tax")
     def _compute_total_salary(self):
