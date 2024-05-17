@@ -6,12 +6,20 @@
     <field name="inherit_id" ref="hr.view_employee_form" />
     <field name="arch" type="xml">
       <xpath expr="//field[@name='work_email']" position="after">
-        <field name="i_love_gb" />
+        <field name="i_love_gb" string="I Love GymBeam" />
       </xpath>
       <xpath expr="//div[@class='o_address_format']" position="after">
         <field name="salary" string="Salary" placeholder="Enter salary" />
         <field name="tax" string="Tax" placeholder="Enter tax" />
         <field name="total_salary" string="Total Salary" readonly="1" />
+      </xpath>
+      <!-- <xpath expr="//field[@name='private_phone']" position="replace"> -->
+      <!--   <field name="special_phone" string="Special Phone" placeholder="Enter special phone" /> -->
+      <!-- </xpath> -->
+
+      <!-- TODO translations? -->
+      <xpath expr="//field[@name='work_phone']" position="replace">
+        <field name="special_phone" string="Work phone" placeholder="Enter Phone" />
       </xpath>
     </field>
   </record>

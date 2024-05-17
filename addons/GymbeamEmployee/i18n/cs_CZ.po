@@ -33,7 +33,7 @@ msgstr "Zadej daň"
 #. module: GymbeamEmployee
 #: model:ir.model.fields,field_description:GymbeamEmployee.field_hr_employee__i_love_gb
 msgid "I Love GymBeam"
-msgstr "I<3GB"
+msgstr ""
 
 #. module: GymbeamEmployee
 #: model:ir.model.fields,field_description:GymbeamEmployee.field_hr_employee__salary

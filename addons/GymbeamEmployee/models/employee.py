@@ -10,12 +10,14 @@ class Employee(models.Model):
     total_salary = fields.Integer(
         string="Total Salary", compute="_compute_total_salary", store=True
     )
+    special_phone = fields.Char(string="Special Phone")
 
     @api.depends("salary", "tax")
     def _compute_total_salary(self):
         self.total_salary = self.salary + self.tax
 
     @api.model
-    def create(self, vals):
-        # Add custom logic here
-        return super(Employee, self).create(vals)
+    def write(self, vals):
+        if not vals.get("special_phone"):
+            vals["special_phone"] = "0901123456"
+        return super(Employee, self).write(vals)
