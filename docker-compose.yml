@@ -1,4 +1,12 @@
 services:
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    logging:
+      driver: 'none'  # disable saving logs
+    ports:
+      - 1025:1025 # smtp server
+      - 8025:8025 # web ui
   web:
     image: odoo:17.0
     depends_on:
@@ -22,7 +30,6 @@ services:
       - POSTGRES_PASSWORD=odoo
     volumes:
       - odoo-db-data:/var/lib/postgresql/data
-
 volumes:
   odoo-web-data:
   odoo-db-data:
