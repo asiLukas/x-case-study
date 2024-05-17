@@ -16,8 +16,6 @@ class HrEmployeeEmailWizard(models.TransientModel):
             raise UserError("Please upload a valid .xlsx file.")
 
         file_content = base64.b64decode(self.employee_contacts)
-        # NOTE for testing
-        print(file_content)
 
         pd_df = pandas.read_excel(io.BytesIO(file_content), header=None)
 
@@ -28,8 +26,6 @@ class HrEmployeeEmailWizard(models.TransientModel):
                 "subject": row.iloc[1],
                 "body": "Welcome in GymBeam",
             }
-            # NOTE for testing
-            print(values)
             self.env["mail.mail"].sudo().create(values).send()
 
         return True
