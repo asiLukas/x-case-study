@@ -35,5 +35,4 @@
       </xpath>
     </field>
   </record>
-  <menuitem id="menu_custom" name="Custom Menu" sequence="10" />
 </odoo>
