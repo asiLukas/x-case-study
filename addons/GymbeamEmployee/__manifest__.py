@@ -9,6 +9,7 @@
     "data": [
         "views/gymbeam_employee_view.xml",
         "views/mail_wizard_view.xml",
+        "views/job_position_view.xml",
         "data/mail_wizard_data.xml",
         "security/ir.model.access.csv",
     ],
