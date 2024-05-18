@@ -9,6 +9,9 @@ class GymbeamApplicant(models.Model):
     applicant_number = fields.Char(
         string="Applicant Number", track_visibility="onchange", required=True
     )
+    gender = fields.Selection(
+        [("male", "Male"), ("female", "Female"), ("other", "Other")], string="Gender"
+    )
 
     @api.constrains("applicant_number")
     def check_for_uniqueness(self):

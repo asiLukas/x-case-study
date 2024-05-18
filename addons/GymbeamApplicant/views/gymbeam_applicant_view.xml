@@ -7,6 +7,7 @@
     <field name="arch" type="xml">
       <xpath expr="//field[@name='email_from']" position="before">
         <field name="applicant_number" string="Applicant Number" />
+        <field name="gender" />
       </xpath>
     </field>
   </record>

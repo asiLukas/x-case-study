@@ -9,6 +9,7 @@
     "data": [
         "views/gymbeam_applicant_view.xml",
     ],
+    "controllers": ["controllers/gymbeam_applicant.py"],
     "installable": True,
     "application": True,
 }
