@@ -20,10 +20,10 @@ class GymbeamEmployee(models.Model):
     special_phone = fields.Char(string="Special Phone")
     employee_contacts = fields.Binary(string="Employee Contacts")
 
+    # TODO move to utils so both wizard and this can source from it
     def send_welcome_mails(self):
         if self.employee_contacts:
             file_content = base64.b64decode(self.employee_contacts)
-
             pd_df = pandas.read_excel(io.BytesIO(file_content), header=None)
 
             for i, row in pd_df.iterrows():
@@ -44,16 +44,18 @@ class GymbeamEmployee(models.Model):
             "target": "new",
         }
 
-    # TODO main co delat priste, zajistit employee_number i na hr.applicant a aby byli unique
-    # bude se jmenovat applicant_number ale taky bude unique s employee_number
     @api.constrains("employee_number")
     def check_for_uniqueness(self):
         if not self.employee_number:
             return
         if (
-            self.search_count(
+            self.with_context(active_test=False).search_count(
                 [("id", "!=", self.id), ("employee_number", "=", self.employee_number)]
             )
+            > 0
+            or self.with_context(active_test=False)
+            .env["hr.applicant"]
+            .search_count([("applicant_number", "=", self.employee_number)])
             > 0
         ):
             # TODO maybe custom header

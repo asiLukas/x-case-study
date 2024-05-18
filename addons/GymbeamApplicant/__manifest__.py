@@ -5,7 +5,7 @@
     "description": "This module extends the built-in Recruitment app",
     "author": "luky",
     "website": "https://www.odoo.com/app/recruitment",
-    "depends": ["hr"],
+    "depends": ["hr_recruitment"],
     "data": [
         "views/gymbeam_applicant_view.xml",
     ],
