@@ -5,7 +5,7 @@ import pandas
 from odoo.exceptions import ValidationError
 
 
-class Employee(models.Model):
+class GymbeamEmployee(models.Model):
     _inherit = "hr.employee"
 
     employee_number = fields.Char(
@@ -72,9 +72,9 @@ class Employee(models.Model):
     @api.model
     def write(self, vals):
         vals = self.check_empty_field(vals, "special_phone", "0901123456")
-        return super(Employee, self).write(vals)
+        return super(GymbeamEmployee, self).write(vals)
 
     @api.model
     def create(self, vals):
         vals = self.check_empty_field(vals, "special_phone", "0901123456")
-        return super(Employee, self).create(vals)
+        return super(GymbeamEmployee, self).create(vals)
