@@ -46,7 +46,6 @@ class GymbeamEmployee(models.Model):
             .search_count([("applicant_number", "=", self.employee_number)])
             > 0
         ):
-            # TODO maybe custom header
             raise ValidationError("Employee Number must be unique!")
 
     @api.depends("salary", "tax")

@@ -2,7 +2,8 @@ import uuid
 import json
 
 from odoo import http
-from odoo.http import request, Response
+from odoo.http import request
+from werkzeug.wrappers import Response
 
 
 class GymbeamApplicantController(http.Controller):
@@ -13,10 +14,18 @@ class GymbeamApplicantController(http.Controller):
         data = request.get_json_data()
 
         if not (candidates := data.pop("candidates", None)):
-            return Response("Missing required field 'candidates'", status=400)
+            return Response(
+                json.dumps({"message": "Missing required field 'candidates'"}),
+                status=400,
+                content_type="application/json",
+            )
         if not isinstance(candidates, list):
             return Response(
-                "The field 'candidates' should be an array or a list", status=400
+                json.dumps(
+                    {"message": "The field 'candidates' should be an array or a list"}
+                ),
+                status=400,
+                content_type="application/json",
             )
 
         applicant_ids = []
@@ -26,11 +35,19 @@ class GymbeamApplicantController(http.Controller):
             email = candidate.pop("email", None)
             gender = candidate.pop("gender", None)
             if not isinstance((job := candidate.pop("job", None)), dict):
-                return Response("Missing or invalid 'job' field")
+                return Response(
+                    json.dumps({"message": "Missing or invalid 'job' field"}),
+                    status=400,
+                    content_type="application/json",
+                )
             api_id = job.get("id", None)
 
             if not all([name, phone, email, gender, api_id]):
-                return Response("Missing required fields", status=400)
+                return Response(
+                    json.dumps({"message": "Missing required fields"}),
+                    status=400,
+                    content_type="application/json",
+                )
 
             job_position = (
                 request.env["hr.job"].sudo().search([("api_id", "=", api_id)], limit=1)
@@ -61,7 +78,7 @@ class GymbeamApplicantController(http.Controller):
             )
 
         return Response(
-            json.dumps({"applicant_ids": applicant_ids}),
+            json.dumps({"message": "OK", "applicant_ids": applicant_ids}),
             status=200,
             content_type="application/json",
         )
