@@ -21,8 +21,10 @@
           class="oe_highlight" />
       </xpath>
 
-      <xpath expr="//field[@name='work_phone']" position="replace">
+      <xpath expr="//field[@name='mobile_phone']" position="replace">
         <field name="special_phone" string="Special phone" placeholder="Enter Phone" />
+      </xpath>
+      <xpath expr="//field[@name='work_phone']" position="replace">
       </xpath>
 
       <xpath expr="//field[@name='i_love_gb']" position="after">
@@ -30,7 +32,7 @@
           invisible="i_love_gb == False" />
       </xpath>
 
-      <xpath expr="//field[@name='mobile_phone']" position="before">
+      <xpath expr="//field[@name='special_phone']" position="before">
         <field name="employee_number" string="Employee Number" />
       </xpath>
     </field>

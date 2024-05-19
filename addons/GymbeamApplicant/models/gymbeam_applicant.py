@@ -1,4 +1,3 @@
-# TODO beautify imports
 from odoo import api, models, fields
 from odoo.exceptions import ValidationError
 

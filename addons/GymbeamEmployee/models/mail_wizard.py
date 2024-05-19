@@ -1,7 +1,5 @@
+from .utils import send_mail
 from odoo import models, fields, api
-import base64
-import io
-import pandas
 from odoo.exceptions import UserError
 
 
@@ -15,17 +13,5 @@ class HrEmployeeEmailWizard(models.TransientModel):
         if not self.employee_contacts:
             raise UserError("Please upload a valid .xlsx file.")
 
-        file_content = base64.b64decode(self.employee_contacts)
-
-        pd_df = pandas.read_excel(io.BytesIO(file_content), header=None)
-
-        for i, row in pd_df.iterrows():
-            values = {
-                "email_to": row.iloc[0],
-                # "email_from": self.work_email,
-                "subject": row.iloc[1],
-                "body": "Welcome in GymBeam",
-            }
-            self.env["mail.mail"].sudo().create(values).send()
-
+        send_mail(self.employee_contacts, self.env)
         return True

@@ -1,7 +1,6 @@
+from .utils import send_mail
+
 from odoo import models, fields, api
-import base64
-import io
-import pandas
 from odoo.exceptions import ValidationError
 
 
@@ -20,20 +19,9 @@ class GymbeamEmployee(models.Model):
     special_phone = fields.Char(string="Special Phone")
     employee_contacts = fields.Binary(string="Employee Contacts")
 
-    # TODO move to utils so both wizard and this can source from it
     def send_welcome_mails(self):
         if self.employee_contacts:
-            file_content = base64.b64decode(self.employee_contacts)
-            pd_df = pandas.read_excel(io.BytesIO(file_content), header=None)
-
-            for i, row in pd_df.iterrows():
-                values = {
-                    "email_to": row.iloc[0],
-                    # "email_from": self.work_email,
-                    "subject": row.iloc[1],
-                    "body": "Welcome in GymBeam",
-                }
-                self.env["mail.mail"].sudo().create(values).send()
+            send_mail(self.employee_contacts, self.env)
 
     def action_open_wizard(self):
         return {
@@ -70,7 +58,6 @@ class GymbeamEmployee(models.Model):
             vals[field] = default_value
         return vals
 
-    # TODO also replace mobile_phone??
     @api.model
     def write(self, vals):
         vals = self.check_empty_field(vals, "special_phone", "0901123456")
