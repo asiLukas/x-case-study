@@ -9,16 +9,16 @@
         <field name="i_love_gb" string="I Love GymBeam" />
       </xpath>
 
+      <header position="inside">
+        <button name="send_welcome_mails" type="object" string="Send Mails" />
+        <button name="action_open_wizard" string="Send Mails(Wizard)" type="object"
+          class="oe_highlight" />
+      </header>
+
       <xpath expr="//div[@class='o_address_format']" position="after">
         <field name="salary" string="Salary" placeholder="Enter salary" />
         <field name="tax" string="Tax" placeholder="Enter tax" />
         <field name="total_salary" string="Total Salary" readonly="1" />
-      </xpath>
-
-      <xpath expr="//button[@name='152']" position="after">
-        <button name="send_welcome_mails" type="object" string="Send Mails" />
-        <button name="action_open_wizard" string="Send Mails(Wizard)" type="object"
-          class="oe_highlight" />
       </xpath>
 
       <xpath expr="//field[@name='mobile_phone']" position="replace">
