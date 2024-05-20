@@ -5,7 +5,15 @@ import pandas
 from odoo.exceptions import ValidationError
 
 
-def send_mail(employee_contacts, env):
+def send_mail(employee_contacts, env) -> None:
+    """
+    creates and sends welcome mails to the recipients
+    supplied in an excel file in the self.employee_contacts
+
+    :param empoyee_contacts(bytes): the excel file
+    :param env: the environment of 'hr.employee'
+    """
+
     file_content = base64.b64decode(employee_contacts)
 
     try:

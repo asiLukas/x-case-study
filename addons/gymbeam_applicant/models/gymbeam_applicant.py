@@ -13,7 +13,9 @@ class GymbeamApplicant(models.Model):
     )
 
     @api.constrains("applicant_number")
-    def check_for_uniqueness(self):
+    def check_for_uniqueness(self) -> None:
+        """checks if employee_number and applicant_number are unique between each other"""
+
         if not self.applicant_number:
             return
         if (

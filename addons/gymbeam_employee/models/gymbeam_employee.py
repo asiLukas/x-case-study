@@ -19,11 +19,16 @@ class GymbeamEmployee(models.Model):
     special_phone = fields.Char(string="Special Phone")
     employee_contacts = fields.Binary(string="Employee Contacts")
 
-    def send_welcome_mails(self):
+    def send_welcome_mails(self) -> None:
+        """creates and sends welcome mails to the recipients
+        supplied in an excel file in the self.employee_contacts"""
+
         if self.employee_contacts:
             send_mail(self.employee_contacts, self.env)
 
-    def action_open_wizard(self):
+    def action_open_wizard(self) -> dict:
+        """action to open a wizard windows"""
+
         return {
             "type": "ir.actions.act_window",
             "name": "Send Emails from Excel",
@@ -33,7 +38,9 @@ class GymbeamEmployee(models.Model):
         }
 
     @api.constrains("employee_number")
-    def check_for_uniqueness(self):
+    def check_for_uniqueness(self) -> None:
+        """checks if both employee_number and applicant_number are unique between each other"""
+
         if not self.employee_number:
             return
         if (
@@ -49,10 +56,18 @@ class GymbeamEmployee(models.Model):
             raise ValidationError("Employee Number must be unique!")
 
     @api.depends("salary", "tax")
-    def _compute_total_salary(self):
+    def _compute_total_salary(self) -> None:
         self.total_salary = self.salary + self.tax
 
     def check_empty_field(self, vals, field, default_value) -> dict:
+        """
+        checks if a field is not filled in
+
+        :param vals(dict): the dict of fields to check
+        :param field(str):  the field to check in the dict
+        :param default_value(str): the default value that should be set when the field is empty
+        :returns vals(dict): the new updated vals dict
+        """
         if vals.get(field) == False:
             vals[field] = default_value
         return vals

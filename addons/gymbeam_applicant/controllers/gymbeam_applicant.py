@@ -10,7 +10,9 @@ class GymbeamApplicantController(http.Controller):
     @http.route(
         "/case_study/applicant/get", type="json", auth="public", methods=["POST"]
     )
-    def create_applicant_bulk(self):
+    def create_applicant_bulk(self) -> None:
+        """endpoint to create n candidates"""
+
         data = request.get_json_data()
 
         if not (candidates := data.pop("candidates", None)):

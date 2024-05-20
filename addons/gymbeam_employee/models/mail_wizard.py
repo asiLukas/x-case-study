@@ -9,7 +9,10 @@ class HrEmployeeEmailWizard(models.TransientModel):
 
     employee_contacts = fields.Binary(string="Employee Contacts")
 
-    def send_welcome_mails(self):
+    def send_welcome_mails(self) -> bool:
+        """creates and sends welcome mails to the recipients
+        supplied in an excel file in the self.employee_contacts"""
+
         if not self.employee_contacts:
             raise UserError("Please upload a valid .xlsx file.")
 
